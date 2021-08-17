@@ -1,7 +1,17 @@
 'use strict';
 
+const moongose = require('mongoose');
+const Product = moongose.model('Product');
+
 exports.post = (req, res, next) => {
-    res.status(201).send(req.body);
+    let product = new Product(req.body);
+    product.save()
+    .then(x => {
+        res.status(201).send({message:"Sucesso ao cadastrar produto.", data: x});
+    }).catch(e => {
+        res.status(201).send({message: 'Falha ao cadastrar produto.', data: e});
+    });
+
 };
 
 exports.put = (req, res, next) => {
