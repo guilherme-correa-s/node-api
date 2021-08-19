@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 
 const app = express();
 
-mongoose.connect('mongodb+srv://guiadm:guiadm@node-store.utlje.mongodb.net/test', { useNewUrlParser: true, useUnifiedTopology: true });
+const uri = 'mongodb+srv://guiadm:guiteste@node-store.utlje.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const Product = require('./models/product');
 
