@@ -27,5 +27,15 @@ exports.getByTags = (tag) =>
 exports.create = (data) => {
     let product = new Product(data);
     return product.save();
-}
+};
 
+exports.put = (id, data) =>
+    Product.findByIdAndUpdate(id, {
+        $set: {
+            title: data.title,
+            description: data.description,
+            price: data.price,
+        },
+    });
+
+exports.delete = (id) => Product.findByIdAndRemove(id);

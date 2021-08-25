@@ -26,7 +26,8 @@ exports.getBySlug = (req, res, next) => {
 };
 
 exports.getById = (req, res, next) => {
-  repository.getById(req.params.id)
+  repository
+    .getById(req.params.id)
     .then((data) => {
       res.status(200).send(data);
     })
@@ -61,13 +62,9 @@ exports.post = (req, res, next) => {
 
 exports.put = (req, res, next) => {
   const id = req.params.id;
-  Product.findByIdAndUpdate(id, {
-    $set: {
-      title: req.body.title,
-      description: req.body.description,
-      price: req.body.price,
-    },
-  })
+  const data = req.body;
+  repository
+    .put(id, data)
     .then((x) => {
       res.status(200).send({
         message: "Sucesso ao atualizar o produto.",
@@ -84,16 +81,17 @@ exports.put = (req, res, next) => {
 
 exports.delete = (req, res, next) => {
   const id = req.params.id;
-  Product.findByIdAndRemove(id)
+  repository
+    .delete(id)
     .then((x) => {
       res.status(200).send({
-        message: "Sucesso ao atualizar o produto.",
+        message: "Sucesso ao deletar o produto.",
         data: x,
       });
     })
     .catch((e) => {
       res.status(201).send({
-        message: "Falha ao atualizar o produto.",
+        message: "Falha ao deletar o produto.",
         data: e,
       });
     });
