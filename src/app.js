@@ -2,11 +2,13 @@
 
 const express = require("express");
 const mongoose = require("mongoose");
+require('dotenv').config('../.env');
+const dbUser = process.env.DB_USER;
+const dbPassword = process.env.DB_PASSWORD;
 
 const app = express();
-
-const uri =
-    "mongodb+srv://guiadm:guiteste@node-store.utlje.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const uri = `
+mongodb+srv://${dbUser}:${dbPassword}@node-store.utlje.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const Product = require("./models/product");
