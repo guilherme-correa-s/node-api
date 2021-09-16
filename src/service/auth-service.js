@@ -49,7 +49,7 @@ exports.isAdmin = (req, res, next) => {
                     next();
                 }
                 else {
-                    res.status(403).send('Esta funcionalidade é restrita para administradores.');
+                    res.status(403).send({message: 'Esta funcionalidade é restrita para administradores.'});
                 }
         })
     }

@@ -1,7 +1,6 @@
 "use strict";
 
 const repository = require("../repositories/customer-repository");
-const ValidationContract = require("../validators/fluent-validator");
 const md5 = require('md5');
 require('dotenv').config('../.env');
 const authService = require('../service/auth-service');
@@ -11,31 +10,12 @@ const saltKey = process.env.SALT_KEY;
 const emailTemplate = process.env.EMAIL_TMPL
 
 exports.post = async (req, res, next) => {
-    let contract = new ValidationContract();
-    contract.hasMinLen(
-        req.body.name,
-        3,
-        "O nome deve conter pelo menos 3 caracteres"
-    );
-
-    contract.isEmail(req.body.email, "E-mail inválido");
-
-    contract.hasMinLen(
-        req.body.password,
-        6,
-        "A senha deve conter pelo menos 6 caracteres"
-    );
-
-    if (!contract.isValid()) {
-        res.status(400).send(contract.errors()).end();
-        return;
-    }
-    const userExist = await repository.get(req.body);
-    if (userExist) {
-        res.status(400).send({ message: 'Usuário já cadastrado.' });
-        return;
-    }
     try {
+        const userExist = await repository.get(req.body);
+        if (userExist) {
+            res.status(400).send({ message: 'Usuário já cadastrado.' });
+            return;
+        }
         await repository.create({
             name: req.body.name,
             email: req.body.email,

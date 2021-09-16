@@ -42,15 +42,17 @@ exports.create = async (data) => {
 };
 
 exports.update = async (id, data) => {
-    await Product.findByIdAndUpdate(id, {
+    const res = await Product.findByIdAndUpdate(id, {
         $set: {
             title: data.title,
             description: data.description,
             price: data.price,
         },
     });
+    return res;
 };
 
 exports.delete = async (id) => {
-    await Product.findByIdAndRemove(id);
+    const res = await Product.findByIdAndRemove(id);
+    return res;
 };
