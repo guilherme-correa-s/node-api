@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node bin/server"
+    "start": "node bin/server",
+    "dev": "nodemon bin/server"
   },
   "keywords": [],
   "author": "",
