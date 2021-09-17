@@ -129,9 +129,9 @@ Parâmetros obrigatórios no corpo da requisição:
 - tags: ```string``` | tags do produto [array]
 
 Um token de admin pode ser passado das seguintes maneiras:
-query: ```/products?<token>```
-body: "token": <token>
-header: x-access-token = <token>
+- query: ```/products?<token>```
+- body: ```"token": <token>```
+- header: ```x-access-token = <token>```
 
 Exemplo de resposta:
 ```json
@@ -145,9 +145,9 @@ Exemplo de resposta:
 Deleta permanentemente um produto da loja.
 
 Um token de admin pode ser passado das seguintes maneiras:
-query: ```/products?<token>```
-body: "token": <token>
-header: x-access-token = <token>
+- query: ```/products?<token>```
+- body: ```"token": <token>```
+- header: ```x-access-token = <token>```
 
 Exemplo de resposta:
 ```json
